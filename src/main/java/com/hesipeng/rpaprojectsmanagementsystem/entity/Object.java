@@ -1,8 +1,9 @@
 package com.hesipeng.rpaprojectsmanagementsystem.entity;
 
+import java.util.Set;
 import java.util.UUID;
 
-import org.springframework.data.web.JsonPath;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,6 +13,7 @@ import lombok.*;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "object")
 public class Object {
     @Id
     @GeneratedValue
@@ -27,7 +29,16 @@ public class Object {
     private String description;
 
     @NonNull
+    @Column(name = "is_utility")
+    private Boolean isUtility;
+
+    @NonNull
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
     private State state;
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "project_object", joinColumns = @JoinColumn(name = "object_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"))
+    private Set<Project> projects;
 }

@@ -1,6 +1,9 @@
 package com.hesipeng.rpaprojectsmanagementsystem.entity;
 
+import java.util.Set;
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,4 +31,9 @@ public class BusinessContact {
     @NonNull
     @Column(name = "email")
     private String email;
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "project_business_contact", joinColumns = @JoinColumn(name = "business_contact_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"))
+    private Set<Project> projects;
 }

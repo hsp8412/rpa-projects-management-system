@@ -1,6 +1,9 @@
 package com.hesipeng.rpaprojectsmanagementsystem.entity;
 
+import java.util.Set;
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,6 +13,7 @@ import lombok.*;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "developer")
 public class Developer {
 
     @Id
@@ -33,7 +37,8 @@ public class Developer {
     @Column(name = "is_active")
     private boolean isActive;
 
-    @NonNull
-    @Column(name = "is_admin")
-    private boolean isAdmin;
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "project_developer", joinColumns = @JoinColumn(name = "developer_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"))
+    private Set<Project> projects;
 }
