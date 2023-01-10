@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Getter
@@ -20,16 +21,19 @@ public class BusinessContact {
     @GeneratedValue
     private UUID uuid = UUID.randomUUID();
 
+    @NotBlank(message = "First name is required")
     @NonNull
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
+    @NotBlank(message = "Last name is required")
     @NonNull
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @NotBlank(message = "Email is required")
     @NonNull
-    @Column(name = "email")
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
     @JsonIgnore

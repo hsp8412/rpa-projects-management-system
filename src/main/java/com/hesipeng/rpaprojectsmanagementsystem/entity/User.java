@@ -27,5 +27,5 @@ public class User {
 
     @NonNull
     @Column(name = "is_admin")
-    private boolean isAdmin;
+    private Boolean isAdmin;
 }
