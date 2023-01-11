@@ -15,4 +15,8 @@ public interface ProjectService {
     Project updateProject(UUID id, Project project);
 
     void deleteProject(UUID id);
+
+    Project addDeveloperToProject(UUID projectId, UUID developerId);
+
+    Project removeDeveloperFromProject(UUID projectId, UUID developerId);
 }

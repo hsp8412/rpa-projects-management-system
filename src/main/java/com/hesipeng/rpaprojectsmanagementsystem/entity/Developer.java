@@ -35,7 +35,7 @@ public class Developer {
 
     @NonNull
     @Column(name = "is_active")
-    private boolean isActive;
+    private Boolean isActive;
 
     @JsonIgnore
     @ManyToMany

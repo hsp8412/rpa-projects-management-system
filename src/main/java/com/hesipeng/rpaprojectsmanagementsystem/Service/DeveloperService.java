@@ -12,13 +12,9 @@ public interface DeveloperService {
 
     Set<Developer> getDevelopersByProjectId(UUID projectId);
 
-    void updateDeveloper(UUID id, Developer developer);
+    Developer updateDeveloper(UUID id, Developer developer);
 
-    void addDeveloper(Developer developer);
+    Developer saveDeveloper(Developer developer);
 
     void deleteDeveloper(UUID id);
-
-    void addDeveloperToProject(UUID projectId, UUID developerId);
-
-    void removeDeveloperFromProject(UUID projectId, UUID developerId);
 }

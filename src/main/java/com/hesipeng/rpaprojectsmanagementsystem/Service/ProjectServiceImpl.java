@@ -4,13 +4,16 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
+import com.hesipeng.rpaprojectsmanagementsystem.Repository.DeveloperRepository;
 import com.hesipeng.rpaprojectsmanagementsystem.Repository.ProjectRepository;
+import com.hesipeng.rpaprojectsmanagementsystem.entity.Developer;
 import com.hesipeng.rpaprojectsmanagementsystem.entity.Project;
 import com.hesipeng.rpaprojectsmanagementsystem.exception.EntityNotFoundException;
 
 public class ProjectServiceImpl implements ProjectService {
 
     ProjectRepository projectRepository;
+    DeveloperRepository developerRepository;
 
     @Override
     public Project getProject(UUID id) {
@@ -49,6 +52,26 @@ public class ProjectServiceImpl implements ProjectService {
             return entity.get();
         else
             throw new EntityNotFoundException(id, Project.class);
+    }
+
+    @Override
+    public Project addDeveloperToProject(UUID projectId, UUID developerId) {
+        Project project = getProject(projectId);
+        Optional<Developer> developer = developerRepository.findById(developerId);
+        Developer unwrappedDeveloper = DeveloperServiceImpl.unwrapBusinessContact(developer, developerId);
+
+        project.getDevelopers().add(unwrappedDeveloper);
+        return projectRepository.save(project);
+    }
+
+    @Override
+    public Project removeDeveloperFromProject(UUID projectId, UUID developerId) {
+        Project project = getProject(projectId);
+        Optional<Developer> developer = developerRepository.findById(developerId);
+        Developer unwrappedDeveloper = DeveloperServiceImpl.unwrapBusinessContact(developer, developerId);
+
+        project.getDevelopers().remove(unwrappedDeveloper);
+        return projectRepository.save(project);
     }
 
 }

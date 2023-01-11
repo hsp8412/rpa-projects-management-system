@@ -2,8 +2,6 @@ package com.hesipeng.rpaprojectsmanagementsystem.entity;
 
 import java.util.UUID;
 
-import org.hibernate.annotations.ManyToAny;
-
 import jakarta.persistence.*;
 import lombok.*;
 
