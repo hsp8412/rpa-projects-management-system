@@ -33,11 +33,11 @@ public class BusinessContact {
 
     @NotBlank(message = "Email is required")
     @NonNull
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
     @JsonIgnore
-    @ManyToMany
-    @JoinTable(name = "project_business_contact", joinColumns = @JoinColumn(name = "business_contact_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"))
-    private Set<Project> projects;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "project_id", referencedColumnName = "id")
+    private Project project;
 }

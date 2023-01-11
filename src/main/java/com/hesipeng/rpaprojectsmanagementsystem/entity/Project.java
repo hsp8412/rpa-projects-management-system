@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Getter
@@ -20,17 +21,26 @@ public class Project {
     @Column(name = "id")
     private UUID id;
 
+    @NotBlank(message = "Name is required")
     @NonNull
     @Column(name = "name")
     private String name;
 
+    @NotBlank(message = "Department is required")
     @NonNull
     @Column(name = "department")
     private String department;
 
+    @NotBlank(message = "Description is required")
     @NonNull
     @Column(name = "description")
     private String description;
+
+    @NotBlank(message = "State is required")
+    @NonNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "state")
+    private State state;
 
     @JsonIgnore
     @ManyToMany
@@ -39,16 +49,14 @@ public class Project {
 
     @JsonIgnore
     @ManyToMany
-    @JoinTable(name = "project_business_contact", joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "business_contact_id", referencedColumnName = "id"))
-    private Set<BusinessContact> businessContacts;
-
-    @JsonIgnore
-    @ManyToMany
     @JoinTable(name = "project_object", joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "object_id", referencedColumnName = "id"))
     private Set<Object> objects;
 
     @JsonIgnore
+    @OneToMany(mappedBy = "business_contact")
+    private Set<BusinessContact> businessContacts;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "process")
     private Set<Process> processes;
-
 }

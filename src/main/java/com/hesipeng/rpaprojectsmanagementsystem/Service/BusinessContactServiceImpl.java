@@ -22,26 +22,31 @@ public class BusinessContactServiceImpl implements BusinessContactService {
     }
 
     @Override
-    public Set<BusinessContact> getBusinessContactByProjectId(UUID projectId) {
+    public Set<BusinessContact> getBusinessContactsByProjectId(UUID projectId) {
+        return businessContactRepository.findByProjectId(projectId);
+    }
+
+    @Override
+    public BusinessContact saveBusinessContactToProject(UUID projectId, BusinessContact businessContact) {
         Optional<Project> project = projectRepository.findById(projectId);
+        Project unwrappedProject = ProjectServiceImpl.unwrapProject(project, projectId);
+        businessContact.setProject(unwrappedProject);
+        return businessContactRepository.save(businessContact);
     }
 
     @Override
-    public void addBusinessContactToProject(UUID projectId, BusinessContact businessContact) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public BusinessContact updateBusinessContact(BusinessContact businessContact, UUID BusinessContactId) {
-        // TODO Auto-generated method stub
-        return null;
+    public BusinessContact updateBusinessContact(BusinessContact businessContact, UUID id) {
+        Optional<BusinessContact> businessContactWrapped = businessContactRepository.findById(id);
+        BusinessContact unwrappedBusinessContact = unwrapBusinessContact(businessContactWrapped, id);
+        unwrappedBusinessContact.setFirstName(businessContact.getFirstName());
+        unwrappedBusinessContact.setLastName(businessContact.getLastName());
+        unwrappedBusinessContact.setEmail(businessContact.getEmail());
+        return businessContactRepository.save(unwrappedBusinessContact);
     }
 
     @Override
     public void deleteBusinessContact(UUID id) {
-        // TODO Auto-generated method stub
-
+        businessContactRepository.deleteById(id);
     }
 
     static BusinessContact unwrapBusinessContact(Optional<BusinessContact> entity, UUID id) {
@@ -50,5 +55,4 @@ public class BusinessContactServiceImpl implements BusinessContactService {
         else
             throw new EntityNotFoundException(id, BusinessContact.class);
     }
-
 }

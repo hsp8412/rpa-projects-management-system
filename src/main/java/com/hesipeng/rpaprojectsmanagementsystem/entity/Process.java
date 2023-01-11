@@ -32,11 +32,6 @@ public class Process {
     @Column(name = "description")
     private String description;
 
-    @NonNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "state")
-    private State state;
-
     @ManyToOne(optional = false)
     @JoinColumn(name = "project_id", referencedColumnName = "id")
     private Project project;

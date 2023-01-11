@@ -6,13 +6,17 @@ import java.util.UUID;
 import com.hesipeng.rpaprojectsmanagementsystem.entity.BusinessContact;
 
 public interface BusinessContactService {
+    // Retrieve
     BusinessContact getBusinessContact(UUID id);
 
-    Set<BusinessContact> getBusinessContactByProjectId(UUID projectId);
+    Set<BusinessContact> getBusinessContactsByProjectId(UUID projectId);
 
-    void addBusinessContactToProject(UUID projectId, BusinessContact businessContact);
+    // Create
+    BusinessContact saveBusinessContactToProject(UUID projectId, BusinessContact businessContact);
 
-    BusinessContact updateBusinessContact(BusinessContact businessContact, UUID BusinessContactId);
+    // Update
+    BusinessContact updateBusinessContact(BusinessContact businessContact, UUID id);
 
+    // Delete
     void deleteBusinessContact(UUID id);
 }
