@@ -50,13 +50,13 @@ public class Project {
     @JsonIgnore
     @ManyToMany
     @JoinTable(name = "project_object", joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "object_id", referencedColumnName = "id"))
-    private Set<Object> objects;
+    private Set<RpaObject> RpaObjects;
 
     @JsonIgnore
     @OneToMany(mappedBy = "business_contact")
     private Set<BusinessContact> businessContacts;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "process")
-    private Set<Process> processes;
+    @OneToMany(mappedBy = "rpa_process")
+    private Set<RpaProcess> rpaProcesses;
 }

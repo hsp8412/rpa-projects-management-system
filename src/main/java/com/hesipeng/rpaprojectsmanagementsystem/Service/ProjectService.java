@@ -1,4 +1,4 @@
-package com.hesipeng.rpaprojectsmanagementsystem.Service;
+package com.hesipeng.rpaprojectsmanagementsystem.service;
 
 import java.util.Set;
 import java.util.UUID;
@@ -19,4 +19,8 @@ public interface ProjectService {
     Project addDeveloperToProject(UUID projectId, UUID developerId);
 
     Project removeDeveloperFromProject(UUID projectId, UUID developerId);
+
+    Project addRpaObjectToProject(UUID projectId, UUID rpaObjectId);
+
+    Project removeRpaObjectFromProject(UUID projectId, UUID rpaObjectId);
 }

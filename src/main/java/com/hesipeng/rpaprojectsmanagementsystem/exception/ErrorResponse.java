@@ -31,5 +31,4 @@ public class ErrorResponse {
     public void setMessage(List<String> message) {
         this.message = message;
     }
-
 }

@@ -10,8 +10,8 @@ import lombok.*;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "process")
-public class Process {
+@Table(name = "rpa_process")
+public class RpaProcess {
     @Id
     @GeneratedValue
     @Column(name = "id")

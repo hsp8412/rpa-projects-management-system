@@ -1,19 +1,22 @@
-package com.hesipeng.rpaprojectsmanagementsystem.Service;
+package com.hesipeng.rpaprojectsmanagementsystem.service;
 
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-import com.hesipeng.rpaprojectsmanagementsystem.Repository.DeveloperRepository;
-import com.hesipeng.rpaprojectsmanagementsystem.Repository.ProjectRepository;
 import com.hesipeng.rpaprojectsmanagementsystem.entity.Developer;
 import com.hesipeng.rpaprojectsmanagementsystem.entity.Project;
+import com.hesipeng.rpaprojectsmanagementsystem.entity.RpaObject;
 import com.hesipeng.rpaprojectsmanagementsystem.exception.EntityNotFoundException;
+import com.hesipeng.rpaprojectsmanagementsystem.repository.DeveloperRepository;
+import com.hesipeng.rpaprojectsmanagementsystem.repository.ProjectRepository;
+import com.hesipeng.rpaprojectsmanagementsystem.repository.RpaObjectRepository;
 
 public class ProjectServiceImpl implements ProjectService {
 
     ProjectRepository projectRepository;
     DeveloperRepository developerRepository;
+    RpaObjectRepository rpaObjectRepository;
 
     @Override
     public Project getProject(UUID id) {
@@ -72,6 +75,30 @@ public class ProjectServiceImpl implements ProjectService {
 
         project.getDevelopers().remove(unwrappedDeveloper);
         return projectRepository.save(project);
+    }
+
+    @Override
+    public Project addRpaObjectToProject(UUID projectId, UUID rpaObjectId) {
+        Optional<Project> project = projectRepository.findById(projectId);
+        Project unwrappedProject = unwrapProject(project, projectId);
+
+        Optional<RpaObject> rpaObject = rpaObjectRepository.findById(rpaObjectId);
+        RpaObject unwrappedRpaObject = RpaObjectServiceImpl.unwrapRpaObject(rpaObject, rpaObjectId);
+
+        unwrappedProject.getRpaObjects().add(unwrappedRpaObject);
+        return projectRepository.save(unwrappedProject);
+    }
+
+    @Override
+    public Project removeRpaObjectFromProject(UUID projectId, UUID rpaObjectId) {
+        Optional<Project> project = projectRepository.findById(projectId);
+        Project unwrappedProject = unwrapProject(project, projectId);
+
+        Optional<RpaObject> rpaObject = rpaObjectRepository.findById(rpaObjectId);
+        RpaObject unwrappedRpaObject = RpaObjectServiceImpl.unwrapRpaObject(rpaObject, rpaObjectId);
+
+        unwrappedProject.getRpaObjects().remove(unwrappedRpaObject);
+        return projectRepository.save(unwrappedProject);
     }
 
 }

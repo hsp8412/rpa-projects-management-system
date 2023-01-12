@@ -1,4 +1,4 @@
-package com.hesipeng.rpaprojectsmanagementsystem.Repository;
+package com.hesipeng.rpaprojectsmanagementsystem.repository;
 
 import java.util.Set;
 import java.util.UUID;

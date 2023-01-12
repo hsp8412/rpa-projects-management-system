@@ -13,8 +13,8 @@ import lombok.*;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "object")
-public class Object {
+@Table(name = "rpa_object")
+public class RpaObject {
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -31,11 +31,6 @@ public class Object {
     @NonNull
     @Column(name = "is_utility")
     private Boolean isUtility;
-
-    @NonNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "state")
-    private State state;
 
     @JsonIgnore
     @ManyToMany
