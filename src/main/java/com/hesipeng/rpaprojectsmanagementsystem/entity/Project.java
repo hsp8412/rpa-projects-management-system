@@ -53,10 +53,11 @@ public class Project {
     private Set<RpaObject> RpaObjects;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "business_contact")
+    @OneToMany(mappedBy = "business_contact", cascade = CascadeType.ALL)
     private Set<BusinessContact> businessContacts;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "rpa_process")
+    @OneToMany(mappedBy = "rpa_process", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH,
+            CascadeType.DETACH })
     private Set<RpaProcess> rpaProcesses;
 }
