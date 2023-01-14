@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/developer")
-public class developerController {
+public class DeveloperController {
     DeveloperService developerService;
 
     @GetMapping("/{id}")

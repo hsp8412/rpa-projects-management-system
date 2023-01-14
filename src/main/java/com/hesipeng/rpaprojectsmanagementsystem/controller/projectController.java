@@ -21,7 +21,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/project")
-public class projectController {
+public class ProjectController {
     ProjectService projectService;
 
     @GetMapping("/{id}")
@@ -50,23 +50,23 @@ public class projectController {
         return new ResponseEntity<>(projectService.updateProject(id, project), HttpStatus.OK);
     }
 
-    @PostMapping("/project/{projectId}/developer/{developerId}")
+    @PostMapping("/projectId/{projectId}/developerId/{developerId}")
     public ResponseEntity<Project> addDeveloperToProject(@PathVariable UUID projectId, @PathVariable UUID developerId) {
         return new ResponseEntity<>(projectService.addDeveloperToProject(projectId, developerId), HttpStatus.OK);
     }
 
-    @PostMapping("/project/{projectId}/developer/{developerId}")
+    @DeleteMapping("/projectId/{projectId}/developerId/{developerId}")
     public ResponseEntity<Project> removeDeveloperFromProject(@PathVariable UUID projectId,
             @PathVariable UUID developerId) {
         return new ResponseEntity<>(projectService.removeDeveloperFromProject(projectId, developerId), HttpStatus.OK);
     }
 
-    @PostMapping("/project/{projectId}/rpaObject/{rpaObjectId}")
+    @PostMapping("/projectId/{projectId}/rpaObjectId/{rpaObjectId}")
     public ResponseEntity<Project> addRpaObjectToProject(@PathVariable UUID projectId, @PathVariable UUID rpaObjectId) {
         return new ResponseEntity<>(projectService.addRpaObjectToProject(projectId, rpaObjectId), HttpStatus.OK);
     }
 
-    @PostMapping("/project/{projectId}/rpaObject/{rpaObjectId}")
+    @DeleteMapping("/projectId/{projectId}/rpaObjectId/{rpaObjectId}")
     public ResponseEntity<Project> removeRpaObjectFromProject(@PathVariable UUID projectId,
             @PathVariable UUID rpaObjectId) {
         return new ResponseEntity<>(projectService.removeRpaObjectFromProject(projectId, rpaObjectId), HttpStatus.OK);

@@ -4,6 +4,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
+import org.springframework.stereotype.Service;
+
 import com.hesipeng.rpaprojectsmanagementsystem.entity.Developer;
 import com.hesipeng.rpaprojectsmanagementsystem.entity.Project;
 import com.hesipeng.rpaprojectsmanagementsystem.entity.RpaObject;
@@ -12,6 +14,10 @@ import com.hesipeng.rpaprojectsmanagementsystem.repository.DeveloperRepository;
 import com.hesipeng.rpaprojectsmanagementsystem.repository.ProjectRepository;
 import com.hesipeng.rpaprojectsmanagementsystem.repository.RpaObjectRepository;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@Service
 public class ProjectServiceImpl implements ProjectService {
 
     ProjectRepository projectRepository;

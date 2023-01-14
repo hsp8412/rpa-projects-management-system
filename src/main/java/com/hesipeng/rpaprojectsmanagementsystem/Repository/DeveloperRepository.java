@@ -8,5 +8,5 @@ import org.springframework.data.repository.CrudRepository;
 import com.hesipeng.rpaprojectsmanagementsystem.entity.Developer;
 
 public interface DeveloperRepository extends CrudRepository<Developer, UUID> {
-    Set<Developer> findByProjectId(UUID projectId);
+
 }

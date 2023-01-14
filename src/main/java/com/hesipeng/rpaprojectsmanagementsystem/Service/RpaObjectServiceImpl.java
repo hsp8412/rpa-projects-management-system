@@ -4,12 +4,21 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
+import org.springframework.stereotype.Service;
+
+import com.hesipeng.rpaprojectsmanagementsystem.entity.Project;
 import com.hesipeng.rpaprojectsmanagementsystem.entity.RpaObject;
 import com.hesipeng.rpaprojectsmanagementsystem.exception.EntityNotFoundException;
+import com.hesipeng.rpaprojectsmanagementsystem.repository.ProjectRepository;
 import com.hesipeng.rpaprojectsmanagementsystem.repository.RpaObjectRepository;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@Service
 public class RpaObjectServiceImpl implements RpaObjectService {
     RpaObjectRepository rpaObjectRepository;
+    ProjectRepository projectRepository;
 
     static RpaObject unwrapRpaObject(Optional<RpaObject> entity, UUID id) {
         if (entity.isPresent())
@@ -31,7 +40,9 @@ public class RpaObjectServiceImpl implements RpaObjectService {
 
     @Override
     public Set<RpaObject> getRpaObjectsByProjectId(UUID projectId) {
-        return rpaObjectRepository.findByProjectId(projectId);
+        Optional<Project> project = projectRepository.findById(projectId);
+        Project unwrappedProject = ProjectServiceImpl.unwrapProject(project, projectId);
+        return unwrappedProject.getRpaObjects();
     }
 
     @Override

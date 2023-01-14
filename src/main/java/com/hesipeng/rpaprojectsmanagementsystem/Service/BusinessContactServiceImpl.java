@@ -4,12 +4,18 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
+import org.springframework.stereotype.Service;
+
 import com.hesipeng.rpaprojectsmanagementsystem.entity.BusinessContact;
 import com.hesipeng.rpaprojectsmanagementsystem.entity.Project;
 import com.hesipeng.rpaprojectsmanagementsystem.exception.EntityNotFoundException;
 import com.hesipeng.rpaprojectsmanagementsystem.repository.BusinessContactRepository;
 import com.hesipeng.rpaprojectsmanagementsystem.repository.ProjectRepository;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@Service
 public class BusinessContactServiceImpl implements BusinessContactService {
 
     BusinessContactRepository businessContactRepository;

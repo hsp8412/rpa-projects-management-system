@@ -4,11 +4,18 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
+import org.springframework.stereotype.Service;
+
 import com.hesipeng.rpaprojectsmanagementsystem.entity.Developer;
+import com.hesipeng.rpaprojectsmanagementsystem.entity.Project;
 import com.hesipeng.rpaprojectsmanagementsystem.exception.EntityNotFoundException;
 import com.hesipeng.rpaprojectsmanagementsystem.repository.DeveloperRepository;
 import com.hesipeng.rpaprojectsmanagementsystem.repository.ProjectRepository;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@Service
 public class DeveloperServiceImpl implements DeveloperService {
 
     DeveloperRepository developerRepository;
@@ -27,7 +34,9 @@ public class DeveloperServiceImpl implements DeveloperService {
 
     @Override
     public Set<Developer> getDevelopersByProjectId(UUID projectId) {
-        return developerRepository.findByProjectId(projectId);
+        Optional<Project> project = projectRepository.findById(projectId);
+        Project unwrappedProject = ProjectServiceImpl.unwrapProject(project, projectId);
+        return unwrappedProject.getDevelopers();
     }
 
     @Override

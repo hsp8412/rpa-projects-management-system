@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/business_contact")
-public class businessContactController {
+public class BusinessContactController {
     BusinessContactService businessContactService;
 
     @GetMapping("/{id}")

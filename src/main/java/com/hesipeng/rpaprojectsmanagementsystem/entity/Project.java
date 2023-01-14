@@ -3,6 +3,9 @@ package com.hesipeng.rpaprojectsmanagementsystem.entity;
 import java.util.Set;
 import java.util.UUID;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.JdbcTypeCode;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
@@ -17,8 +20,10 @@ import lombok.*;
 @Table(name = "project")
 public class Project {
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+    @JdbcTypeCode(java.sql.Types.VARCHAR)
     private UUID id;
 
     @NotBlank(message = "Name is required")
@@ -36,7 +41,6 @@ public class Project {
     @Column(name = "description")
     private String description;
 
-    @NotBlank(message = "State is required")
     @NonNull
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
@@ -53,11 +57,11 @@ public class Project {
     private Set<RpaObject> RpaObjects;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "business_contact", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private Set<BusinessContact> businessContacts;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "rpa_process", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH,
+    @OneToMany(mappedBy = "project", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH,
             CascadeType.DETACH })
     private Set<RpaProcess> rpaProcesses;
 }
