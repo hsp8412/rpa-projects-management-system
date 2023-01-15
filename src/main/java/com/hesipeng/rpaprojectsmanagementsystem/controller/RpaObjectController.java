@@ -33,7 +33,7 @@ public class RpaObjectController {
         return new ResponseEntity<>(rpaObjectService.getRpaObject(id), HttpStatus.OK);
     }
 
-    @GetMapping("/project/{projectId}")
+    @GetMapping("/projectId/{projectId}")
     public ResponseEntity<Set<RpaObject>> getRpaObjectsByProjectId(UUID projectId) {
         return new ResponseEntity<>(rpaObjectService.getRpaObjectsByProjectId(projectId), HttpStatus.OK);
     }

@@ -25,7 +25,7 @@ public class ProjectController {
     ProjectService projectService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Project> getProject(UUID id) {
+    public ResponseEntity<Project> getProject(@PathVariable UUID id) {
         return new ResponseEntity<>(projectService.getProject(id), HttpStatus.OK);
     }
 

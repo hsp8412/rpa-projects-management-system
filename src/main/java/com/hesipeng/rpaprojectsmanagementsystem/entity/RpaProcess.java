@@ -2,6 +2,8 @@ package com.hesipeng.rpaprojectsmanagementsystem.entity;
 
 import java.util.UUID;
 
+import org.hibernate.annotations.JdbcTypeCode;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,6 +17,7 @@ public class RpaProcess {
     @Id
     @GeneratedValue
     @Column(name = "id")
+    @JdbcTypeCode(java.sql.Types.VARCHAR)
     private UUID id;
 
     @NonNull

@@ -2,6 +2,8 @@ package com.hesipeng.rpaprojectsmanagementsystem.entity;
 
 import java.util.UUID;
 
+import org.hibernate.annotations.JdbcTypeCode;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
@@ -16,9 +18,10 @@ import lombok.*;
 @Table(name = "business_contact")
 public class BusinessContact {
     @Id
-    @Column(name = "id")
     @GeneratedValue
-    private UUID uuid = UUID.randomUUID();
+    @Column(name = "id")
+    @JdbcTypeCode(java.sql.Types.VARCHAR)
+    private UUID uuid;
 
     @NotBlank(message = "First name is required")
     @NonNull

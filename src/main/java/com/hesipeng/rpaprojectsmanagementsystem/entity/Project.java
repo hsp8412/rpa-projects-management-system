@@ -3,7 +3,6 @@ package com.hesipeng.rpaprojectsmanagementsystem.entity;
 import java.util.Set;
 import java.util.UUID;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,9 +19,8 @@ import lombok.*;
 @Table(name = "project")
 public class Project {
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+    @GeneratedValue
+    @Column(name = "id")
     @JdbcTypeCode(java.sql.Types.VARCHAR)
     private UUID id;
 
@@ -61,7 +59,6 @@ public class Project {
     private Set<BusinessContact> businessContacts;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "project", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH,
-            CascadeType.DETACH })
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private Set<RpaProcess> rpaProcesses;
 }

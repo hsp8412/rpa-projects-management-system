@@ -28,12 +28,12 @@ public class BusinessContactController {
         return new ResponseEntity<>(businessContactService.getBusinessContact(id), HttpStatus.OK);
     }
 
-    @GetMapping("/project/{projectId}")
+    @GetMapping("/projectId/{projectId}")
     public ResponseEntity<Iterable<BusinessContact>> getBusinessContactsByProjectId(@PathVariable UUID projectId) {
         return new ResponseEntity<>(businessContactService.getBusinessContactsByProjectId(projectId), HttpStatus.OK);
     }
 
-    @PostMapping("/project/{projectId}")
+    @PostMapping("/projectId/{projectId}")
     public ResponseEntity<BusinessContact> saveBusinessContactToProject(@RequestBody BusinessContact businessContact,
             @PathVariable UUID projectId) {
         return new ResponseEntity<>(businessContactService.saveBusinessContactToProject(projectId, businessContact),

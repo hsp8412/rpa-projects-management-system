@@ -3,6 +3,8 @@ package com.hesipeng.rpaprojectsmanagementsystem.entity;
 import java.util.Set;
 import java.util.UUID;
 
+import org.hibernate.annotations.JdbcTypeCode;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
@@ -19,6 +21,7 @@ public class Developer {
     @Id
     @GeneratedValue
     @Column(name = "id")
+    @JdbcTypeCode(java.sql.Types.VARCHAR)
     private UUID id;
 
     @NonNull

@@ -33,7 +33,7 @@ public class DeveloperController {
         return new ResponseEntity<>(developerService.getAllDevelopers(), HttpStatus.OK);
     }
 
-    @GetMapping("/project/{projectId}")
+    @GetMapping("/projectId/{projectId}")
     public ResponseEntity<Iterable<Developer>> getDevelopersByProjectId(@PathVariable UUID projectId) {
         return new ResponseEntity<>(developerService.getDevelopersByProjectId(projectId), HttpStatus.OK);
     }

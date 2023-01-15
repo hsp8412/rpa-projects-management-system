@@ -2,6 +2,8 @@ package com.hesipeng.rpaprojectsmanagementsystem.entity;
 
 import java.util.UUID;
 
+import org.hibernate.annotations.JdbcTypeCode;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,11 +12,12 @@ import lombok.*;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue
     @Column(name = "id")
+    @JdbcTypeCode(java.sql.Types.VARCHAR)
     private UUID id;
 
     @NonNull
